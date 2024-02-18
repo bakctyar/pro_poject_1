@@ -1,0 +1,32 @@
+{% load post_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+</head>
+
+{% block content %}
+{% endblock %}
+
+<h4>последнее добавленные посты</h4>
+
+{% latest_posts  as lp%}
+
+<p>
+<a href="{% url "post:post_feed" %}">
+    новостная лента RSS
+</a>
+</p>
+
+<ul>
+    {% for post in lp  %}
+    <li>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+</html>

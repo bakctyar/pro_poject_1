@@ -1,0 +1,9 @@
+{% extends "ac_base.html" %}
+{% block title %}Logged out{% endblock %}
+{% block content %}
+<h1>Logged out</h1>
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">logout</button>
+</form>
+{% endblock %}

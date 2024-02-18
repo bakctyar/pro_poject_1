@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Поиск{% endblock %}
+{% block content %}
+{% if query %}
+<h1> по запросу "{{ query }}"</h1>
+<h3>
+    {% with results.count as total_results %}
+    найден {{ total_results }} результат
+    {% endwith %}
+</h3>
+{% for post in results %}
+<h4>
+    <a href="{{ post.get_absolute_url }}">
+        {{ post.title }}
+    </a>
+</h4>
+{{ post.body}}
+<h3>{{search_get}}</h3>
+{% empty %}
+<p>по этому зопросу результат не нойден</p>
+{% endfor %}
+<p><a href="{% url "post:post_search" %}">Повторить попытку снова</a></p>
+{% else %}
+<h1>Слова для поиска</h1>
+<form method="get">
+    {{ form.as_p }}
+    <input type="submit" value="Search">
+</form>
+
+{% endif %}
+{% endblock %}
